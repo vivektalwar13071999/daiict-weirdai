@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+
+
+    <title>Text to speech and sign</title>
+
+  </head>
+
+  <body>
+
+    <p id="outputText">converted text appears here!</p>
+    <img id="signImage" src="image/download.jpeg" alt="Sign language image appears here">
+
+    <input type="file" accept="audio/*" capture id="recorder">
+      <audio id="player" controls></audio>
+
+
+      <script>
+        var recorder = document.getElementById('recorder');
+        var player = document.getElementById('player');
+
+        recorder.addEventListener('change', function(e) {
+          var file = e.target.files[0];
+          // Do something with the audio file.
+          var fd = new FormData();
+          fd.append('data', file);
+          $.ajax
+          (
+            {
+               type: 'POST',
+               url: '/eval',
+               data: fd,
+               processData: false,
+               contentType: false,
+               dataType: "script"
+             }
+          );
+
+          player.src =  URL.createObjectURL(file);
+        });
+      </script>
+
+
+
+
+
+  </body>
+
+
+
+
+
+</html>
