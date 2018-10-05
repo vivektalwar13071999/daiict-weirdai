@@ -1,0 +1,2 @@
+# daiict-weirdai
+daiict hackathon
